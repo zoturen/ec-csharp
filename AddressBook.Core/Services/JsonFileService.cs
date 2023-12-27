@@ -23,17 +23,17 @@ public class JsonFileService <T> : IFileService<T> where T : IRoot
         }
     }
 
-    public Task<List<T>> ReadFromFileAsync(string fileName)
+    public async Task<List<T>> ReadFromFileAsync(string fileName)
     {
         try
         {
-            var jsonString = File.ReadAllTextAsync(fileName).Result;
-            return Task.FromResult(JsonConvert.DeserializeObject<List<T>>(jsonString) ?? new List<T>());
+            var jsonString = await File.ReadAllTextAsync(fileName);
+            return JsonConvert.DeserializeObject<List<T>>(jsonString) ?? new List<T>();
         }
         catch (Exception e)
         {
             Console.WriteLine($"An error occurred reading file: {e.Message}");
-            return Task.FromResult(new List<T>());
+            return new List<T>();
         }
     }
 }
