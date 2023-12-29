@@ -10,7 +10,6 @@ public static class Extensions
     public static IServiceCollection AddAddressBookCore(this IServiceCollection services)
     {
         services.AddSingleton<IContactRepository, ContactRepository>();
-        services.AddSingleton<IFileService<Contact>, JsonFileService<Contact>>();
         
         return services;
     }
