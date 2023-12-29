@@ -65,7 +65,7 @@ public class ContactRepository : IContactRepository
         }
         
         _contacts = new Lazy<Task<List<Contact>>>(() => Task.FromResult(contacts.Append(contact).ToList()));
-        if (await _fileService.SaveToFileAsync(contacts, _fileName))
+        if (await _fileService.SaveToFileAsync(await _contacts.Value, _fileName))
         {
             return new RepositoryResponse<Contact>
             {
