@@ -1,8 +1,8 @@
+using AddressBook.Console.Services;
 using AddressBook.Core.Models;
-using AddressBook.Core.Services;
 using Newtonsoft.Json;
 
-namespace AddressBook.Core.Tests.Services;
+namespace AddressBook.Console.Tests.Services;
 
 [TestFixture]
 public class JsonFileServiceTests
