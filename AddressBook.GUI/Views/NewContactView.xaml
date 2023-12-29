@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:controls="clr-namespace:AddressBook.GUI.Controls"
+             x:Class="AddressBook.GUI.Views.NewContactView"
+             xmlns:vm="clr-namespace:AddressBook.GUI.ViewModels"
+             x:DataType="vm:NewContactViewModel"
+             Title="New Contact">
+    <ContentPage.Content>
+        <ScrollView Padding="20">
+            <StackLayout>
+                <Grid ColumnDefinitions="20*, 60*, 20*">
+                    <controls:BackButton Size="50" />
+                    <Label Grid.Column="1" Text="Enter Details" FontSize="30" HorizontalTextAlignment="Center"
+                           VerticalTextAlignment="Center" />
+
+                    <controls:CheckButton Grid.Column="2" Size="50" OnSubmit="{Binding  CreateContactCommand}" />
+                </Grid>
+
+                <ScrollView VerticalScrollBarVisibility="Always">
+                    <StackLayout>
+                        <controls:ContactInfoCard
+                            PlaceholderText="Direktör"
+                            LabelText="First name"
+                            InputText="{Binding Contact.FirstName, Mode=TwoWay}"
+                            Validate="{Binding ValidateFirstname}" />
+
+                        <controls:ContactInfoCard
+                            PlaceholderText="Jansson"
+                            LabelText="Last name"
+                            InputText="{Binding Contact.LastName, Mode=TwoWay}"
+                            Validate="{Binding ValidateLastName}" />
+
+                        <controls:ContactInfoCard
+                            PlaceholderText="direktorn@hotmail.com"
+                            LabelText="Email"
+                            InputText="{Binding Contact.Email, Mode=TwoWay}"
+                            Validate="{Binding ValidateEmail}" />
+
+                        <controls:ContactInfoCard
+                            PlaceholderText="0761231234"
+                            LabelText="Phone number"
+                            InputText="{Binding Contact.PhoneNumber, Mode=TwoWay}"
+                            Validate="{Binding ValidatePhoneNumber}" />
+
+                        <controls:ContactInfoCard
+                            PlaceholderText="Vädervägen 20"
+                            LabelText="Street"
+                            InputText="{Binding Contact.Address.Street, Mode=TwoWay}"
+                            Validate="{Binding ValidateStreet}" />
+
+                        <controls:ContactInfoCard
+                            PlaceholderText="Örebro"
+                            LabelText="City"
+                            InputText="{Binding Contact.Address.City, Mode=TwoWay}"
+                            Validate="{Binding ValidateCity}" />
+
+                        <controls:ContactInfoCard
+                            PlaceholderText="70493"
+                            LabelText="Zip Code"
+                            InputText="{Binding Contact.Address.ZipCode, Mode=TwoWay}"
+                            Validate="{Binding ValidateZipCode}" />
+
+                        <controls:ContactInfoCard
+                            PlaceholderText="Sverige"
+                            LabelText="Country"
+                            InputText="{Binding Contact.Address.Country, Mode=TwoWay}"
+                            Validate="{Binding ValidateCountry}" />
+
+                    </StackLayout>
+                </ScrollView>
+            </StackLayout>
+
+        </ScrollView>
+
+
+    </ContentPage.Content>
+</ContentPage>

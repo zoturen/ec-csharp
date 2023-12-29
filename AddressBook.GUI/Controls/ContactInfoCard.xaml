@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<ContentView xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="AddressBook.GUI.Controls.ContactInfoCard"
+             x:Name="Self">
+
+
+    <Border Margin="0, 20, 0, 20"
+            Stroke="CornFlowerBlue"
+            StrokeShape="RoundRectangle 40,40, 0,40">
+        <FlexLayout Margin="20" Direction="Column">
+            <Label Text="{Binding Source={x:Reference Self}, Path=LabelText}" FontSize="24" Margin="0, 0, 0, 10" />
+            <Entry FontSize="24" Placeholder="{Binding Source={x:Reference Self}, Path=PlaceholderText}"
+                   Margin="0, 0, 0, 10" Text="{Binding Source={x:Reference Self}, Path=InputText, Mode=TwoWay}"
+                   TextChanged="InputView_OnTextChanged" />
+            <Label TextColor="PaleVioletRed" IsVisible="{Binding Source={x:Reference Self}, Path=HasError}"
+                   Text="{Binding Source={x:Reference Self}, Path=ErrorText}" FontSize="24" Margin="0, 0, 0, 10" />
+        </FlexLayout>
+    </Border>
+</ContentView>
