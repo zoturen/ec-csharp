@@ -5,19 +5,15 @@ using Newtonsoft.Json;
 
 namespace AddressBook.GUI.Services;
 
-public class JsonFileService <T> : IFileService<T> where T : IRoot
+public class JsonFileService<T> : IFileService<T> where T : IRoot
 {
-    
     public Task<bool> SaveToFileAsync(IEnumerable entities, string fileName)
     {
         try
         {
             var targetFile = Path.Combine(FileSystem.Current.AppDataDirectory, fileName);
-            using var outputStream = File.OpenWrite(targetFile);
-            using var streamWriter = new StreamWriter(outputStream);
             var jsonString = JsonConvert.SerializeObject(entities);
-            streamWriter.Write(jsonString);
-            
+            File.WriteAllText(targetFile, jsonString);
             return Task.FromResult(true);
         }
         catch (Exception e)
