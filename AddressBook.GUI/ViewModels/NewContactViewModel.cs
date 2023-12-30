@@ -11,10 +11,7 @@ public partial class NewContactViewModel : ObservableObject
     private readonly ContactService _contactService;
 
 
-    [ObservableProperty] private Contact _contact = new()
-    {
-        Address = new Address()
-    };
+    [ObservableProperty] private Contact _contact;
 
 
     public NewContactViewModel(ContactService contactService)
@@ -22,14 +19,14 @@ public partial class NewContactViewModel : ObservableObject
         _contactService = contactService;
     }
 
-    public Func<string?> ValidateFirstname => Contact.ValidateFirstname;
-    public Func<string?> ValidateLastName => Contact.ValidateLastname;
-    public Func<string?> ValidateEmail => Contact.ValidateEmail;
-    public Func<string?> ValidatePhoneNumber => Contact.ValidatePhoneNumber;
-    public Func<string?> ValidateStreet => Contact.Address.ValidateStreet;
-    public Func<string?> ValidateCity => Contact.Address.ValidateCity;
-    public Func<string?> ValidateZipCode => Contact.Address.ValidateZipCode;
-    public Func<string?> ValidateCountry => Contact.Address.ValidateCountry;
+    public Func<string?> ValidateFirstname => () => Contact.ValidateFirstname();
+    public Func<string?> ValidateLastName => () => Contact.ValidateLastname();
+    public Func<string?> ValidateEmail => () => Contact.ValidateEmail();
+    public Func<string?> ValidatePhoneNumber => () => Contact.ValidatePhoneNumber();
+    public Func<string?> ValidateStreet => () => Contact.Address.ValidateStreet();
+    public Func<string?> ValidateCity => () => Contact.Address.ValidateCity();
+    public Func<string?> ValidateZipCode => () => Contact.Address.ValidateZipCode();
+    public Func<string?> ValidateCountry => () => Contact.Address.ValidateCountry();
 
 
     [RelayCommand]
@@ -43,5 +40,13 @@ public partial class NewContactViewModel : ObservableObject
 
 
         // FIXME: should display error if not working
+    }
+
+    public void OnAppearing()
+    {
+        Contact = new Contact
+        {
+            Address = new Address()
+        };
     }
 }

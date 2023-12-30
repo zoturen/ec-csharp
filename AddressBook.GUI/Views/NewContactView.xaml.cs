@@ -9,4 +9,10 @@ public partial class NewContactView : ContentPage
         InitializeComponent();
         BindingContext = vm;
     }
+
+    protected override void OnAppearing()
+    {
+        base.OnAppearing();
+        ((NewContactViewModel) BindingContext!).OnAppearing();
+    }
 }

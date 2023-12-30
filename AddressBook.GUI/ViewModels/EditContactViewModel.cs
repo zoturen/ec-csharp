@@ -1,4 +1,3 @@
-using AddressBook.Core.Models;
 using AddressBook.GUI.Services;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
@@ -11,10 +10,7 @@ public partial class EditContactViewModel : ObservableObject
 {
     private readonly ContactService _contactService;
 
-    [ObservableProperty] private Contact _contact = new()
-    {
-        Address = new Address()
-    };
+    [ObservableProperty] private Contact _contact;
 
     public EditContactViewModel(ContactService contactService)
     {
@@ -23,14 +19,14 @@ public partial class EditContactViewModel : ObservableObject
 
     public string Id { get; set; } = "";
 
-    public Func<string?> ValidateFirstname => Contact.ValidateFirstname;
-    public Func<string?> ValidateLastName => Contact.ValidateLastname;
-    public Func<string?> ValidateEmail => Contact.ValidateEmail;
-    public Func<string?> ValidatePhoneNumber => Contact.ValidatePhoneNumber;
-    public Func<string?> ValidateStreet => Contact.Address.ValidateStreet;
-    public Func<string?> ValidateCity => Contact.Address.ValidateCity;
-    public Func<string?> ValidateZipCode => Contact.Address.ValidateZipCode;
-    public Func<string?> ValidateCountry => Contact.Address.ValidateCountry;
+    public Func<string?> ValidateFirstname => () => Contact.ValidateFirstname();
+    public Func<string?> ValidateLastName => () => Contact.ValidateLastname();
+    public Func<string?> ValidateEmail => () => Contact.ValidateEmail();
+    public Func<string?> ValidatePhoneNumber => () => Contact.ValidatePhoneNumber();
+    public Func<string?> ValidateStreet => () => Contact.Address.ValidateStreet();
+    public Func<string?> ValidateCity => () => Contact.Address.ValidateCity();
+    public Func<string?> ValidateZipCode => () => Contact.Address.ValidateZipCode();
+    public Func<string?> ValidateCountry => () => Contact.Address.ValidateCountry();
 
 
     [RelayCommand]
