@@ -8,7 +8,6 @@ namespace AddressBook.GUI.Services;
 public partial class ContactService : ObservableObject
 {
     private readonly IContactRepository _contactRepository;
-
     [ObservableProperty] private ObservableCollection<Contact> _contactList = [];
     [ObservableProperty] private bool _emptyList;
     [ObservableProperty] private bool _notEmptyList;
@@ -19,7 +18,7 @@ public partial class ContactService : ObservableObject
         UpdateContactCollection();
     }
 
-    private void UpdateContactCollection()
+    public void UpdateContactCollection()
     {
         var task = _contactRepository.GetContactsAsync();
         var res = task.Result;
